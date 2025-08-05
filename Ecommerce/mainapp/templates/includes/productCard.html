@@ -1,0 +1,16 @@
+<div class="card">
+        <div class="card-img">
+            <img src="{{product.image.url}}" alt="">
+        </div>
+        <div class="card-body">
+            <div class="card-title">
+                <a href="{% url 'prod_details' product.pk %}">
+                {{product.title}}
+                </a>
+            </div>
+            <div class="card-text">
+                <span>Rs.{{product.price}}</span>
+            </div>
+            <a href="" class="btn btn-primary">Add to Cart</a>
+        </div>
+    </div>

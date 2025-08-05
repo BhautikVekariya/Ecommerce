@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-x%@_2z%qxo+u!+3abn#c7+24r_9r6g$bfp_1_rp8_318w##svc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "mainapp"
+    "mainapp",
+    "authentication"
 ]
 
 MIDDLEWARE = [
@@ -115,9 +116,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+STATICFILES_DIRS=[
+    BASE_DIR / 'static'
+]
 STATIC_URL = "static/"
+
+# User uploaded media
+MEDIA_ROOT= BASE_DIR/'media'
+MEDIA_URL= '/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

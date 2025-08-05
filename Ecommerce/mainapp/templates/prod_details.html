@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{product.title}}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid" id="product-details">
+    <div class="row">
+        <div class="col">
+            <img src="{{product.image.url}}" class="w-100" alt="">
+        </div>
+        <div class="col">
+            <h2>
+                {{product.title.capitalize}}
+            </h2>
+            <p>
+                Rs.{{product.price}}
+            </p>
+
+
+            <div class="row">
+                <a href="" class="col-sm-4 btn btn-primary">Add to Cart</a>
+                <a href="{% url 'updateproduct' product.pk %}" class="col-sm-4 btn btn-warning">Update</a>
+                <a href="{% url 'deleteproduct' product.pk %}" class="col-sm-4 btn btn-danger">Delete</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}
