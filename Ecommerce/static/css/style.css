@@ -5,10 +5,11 @@
 }
 
 body {
+    height: 40px;
     background-color: gray;
 
     header {
-        height: 70px;
+        height: 55px;
         z-index: 10;
 
         nav {
@@ -17,8 +18,8 @@ body {
         }
 
         .logo-circle {
-            width: 50px;
-            height: 50px;
+            width: 46px;
+            height: 47px;
             object-fit: cover;
             border-radius: 50%;
             border: 2px solid white;
@@ -36,11 +37,13 @@ body {
         #logout {
             border: 1px solid white;
         }
+
     }
 
     main {
 
         margin-top: 55px;
+        width: 100%;
 
         section.container {
             margin-top: 10px;
@@ -50,8 +53,10 @@ body {
 
             div.card {
                 margin: auto;
-                width: 300px;
-                height: 400px;
+                margin-top: 20px;
+                margin-bottom: 23px;
+                width: 274px;
+                height: 350px;
                 display: flex;
                 flex-direction: column;
 
@@ -63,9 +68,9 @@ body {
                     height: 60%;
 
                     img {
-                        max-width: 100%;
+                        width: 100%;
                         max-height: 100%;
-                        object-fit: contain;
+                        object-fit: fill;
                     }
                 }
 
@@ -104,6 +109,8 @@ body {
             border-radius: 5px;
             overflow: hidden;
             transition-duration: 1s;
+            width: 50%;
+            margin-top: 20px;
         }
 
         .card:hover {
