@@ -26,9 +26,18 @@ class CustomLoginForm(AuthenticationForm):
     )
 
 class CustomRegisterForm(UserCreationForm):
+    class Meta:
+        model = User 
+        fields = ('username','email','password1','password2')
+    email = forms.EmailField(
+        widget= forms.EmailInput(attrs={
+            'class' : 'form-control',
+            'placeholder' : 'Enter your email'
+        })
+    )
     username = forms.CharField(
         widget= forms.TextInput(attrs={
-            'class' : 'form-control x',
+            'class' : 'form-control',
             'placeholder' : 'Enter your username',
             
         })
@@ -50,6 +59,4 @@ class CustomRegisterForm(UserCreationForm):
         })
     )
 
-    class Meta:
-        model = User 
-        fields = ('username','password1','password2')
+    

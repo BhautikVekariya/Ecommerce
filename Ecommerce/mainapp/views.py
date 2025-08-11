@@ -35,9 +35,11 @@ def contactView(request):
 def productsView(request):
     template = 'products.html'
     context = {
+        'products' : Product.objects.all()
 
     }
     return render(request, template, context)
+
 
 
 class AddProduct(CreateView):
@@ -48,7 +50,7 @@ class AddProduct(CreateView):
 
 class ProductDetails(DetailView):
     model = Product
-    template_name = 'product_details.html'
+    template_name = 'prod_details.html'
     context_object_name = 'product'
 
 class UpdateProduct(UpdateView):
