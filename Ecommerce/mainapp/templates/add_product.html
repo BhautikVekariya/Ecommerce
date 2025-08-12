@@ -5,8 +5,9 @@ Add Product
 
 
 {% block content %}
-<div class="w-50 mx-auto" >
-    <form method="post" enctype="multipart/form-data" class="form-control">
+<div class="w-50 mx-auto">
+    <form method="post" enctype="multipart/form-data" class="form-control" id="add-prod">
+        <h5>Add products</h5>
         {% csrf_token %}
         {% for field in form %}
         <div class="row my-3">

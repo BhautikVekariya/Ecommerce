@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic import CreateView, ListView, DetailView,UpdateView,DeleteView
 
 from . models import Product
+from django.urls import reverse_lazy
 # Create your views here.
 # def homeView(request):
 #     template = 'home.html'
@@ -63,3 +64,9 @@ class DeleteProduct(DeleteView):
     model = Product
     template_name = 'delete_product.html'
     success_url = '/'
+
+class EditProduct(UpdateView):
+    model=Product
+    fields='__all__'
+    template_name='edit_product.html'
+    success_url=reverse_lazy('homepage')
