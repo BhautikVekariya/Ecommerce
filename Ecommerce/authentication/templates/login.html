@@ -6,7 +6,7 @@ Login
 
 {% block content %}
 <div class="container d-flex justify-content-center align-items-center min-vh-80">
-    <div class="card shadow p-4">
+    <div class="login shadow p-4">
         <h2 class="mb-4 text-center">
             Log in
         </h2>
@@ -26,8 +26,10 @@ Login
             {% endfor %}
             <button class="btn btn-primary center" type="submit">Log in</button>
         </form>
-        <span>New here? <a href="{% url 'signup' %}">Signup here !!!</a></span>
-        <span><a href="{% url 'send-otp' %}">Forgot password?</a></span>
+        <div class="d-flex flex-column">
+            <span>New here? <a href="{% url 'signup' %}">Signup here !!!</a></span>
+            <span><a href="{% url 'send-otp' %}">Forgot password?</a></span>
+        </div>
     </div>
 
 </div>

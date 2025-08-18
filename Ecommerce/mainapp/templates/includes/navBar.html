@@ -18,18 +18,18 @@
                     <a class="nav-link active" href="{% url 'aboutpage' %}">About</a>
                 </li>
                 {% if user.is_authenticated %}
-                {% if user.is_staff %}
+                
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'products' %}">Products</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'add_product' %}">Add Product</a>
                 </li>
-                {% else %}
+             
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'my_cart' %}">{{user.username.capitalize}}'s Cart</a>
                 </li>
-                {%endif %}
+               
                 {%endif %}
             </ul>
 
@@ -47,6 +47,7 @@
                     {% csrf_token %}
                     <button class="btn btn-danger" id="logout" type="submit">Logout</button>
                 </form>
+                <a href="{% url 'view_profile' %}" class="btn btn-secondary">Profile</a>
                 {% else %}
                 <a href="{% url 'signup' %}" class="btn btn-secondary">Register</a>
                 <a href="{% url 'signin' %}" class="btn btn-warning">Login</a>

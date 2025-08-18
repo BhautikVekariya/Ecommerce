@@ -6,7 +6,7 @@
 
 body {
     height: 40px;
-    background-color: gray;
+    background-color: beige;
 
     header {
         height: 55px;
@@ -18,18 +18,20 @@ body {
         }
 
         .logo-circle {
-            width: 46px;
-            height: 47px;
+            width: 39px;
+            height: 39px;
             object-fit: cover;
             border-radius: 50%;
             border: 2px solid white;
         }
-        #ico-circle{
+
+        #ico-circle {
             width: 40px;
             height: 40px;
             object-fit: cover;
             border-radius: 50%;
         }
+
         #search::placeholder {
             color: white;
 
@@ -45,10 +47,10 @@ body {
 
     }
 
-        main {
+    main {
 
-            margin-top: 70px;
-            width: 100%;
+        margin-top: 70px;
+        width: 100%;
 
         section.container {
             margin-top: 10px;
@@ -109,6 +111,11 @@ body {
             }
         }
 
+        /* about page */
+        .about {
+            background-color: black;
+            border-radius: 10px;
+        }
 
         .card {
             border-radius: 5px;
@@ -118,10 +125,29 @@ body {
 
         }
 
+        /* login page */
+        .login {
+            border-radius: 5px;
+            overflow: hidden;
+            width: 50%;
+            margin-top: 20px;
+            background-color: #212529;
+
+        }
+
+        /* register */
+        .register {
+            border-radius: 5px;
+            overflow: hidden;
+            width: 50%;
+            margin-top: 20px;
+            background-color: #212529;
+        }
+
         .card:hover {
             box-shadow: 1px 1px 1px rgb(214, 227, 230);
             transition-duration: 500ms;
-            box-shadow: 1px 1px 1px 1px rgb(62, 68, 255);
+            box-shadow: 1px 1px 1px 1px #191a1a;
             transform: scale(1.05);
         }
 
@@ -129,9 +155,9 @@ body {
         /* Product_details */
         div#product-details {
             .row {
-           
+
                 .col {
-                    height: 400px;
+                    height: 350px;
                     margin: 17px;
                     width: 200px;
 
@@ -140,35 +166,41 @@ body {
                         object-fit: contain;
                         width: 100%;
                         background-color: black;
-                      
+
 
                     }
-                    #button{
+
+                    #button {
                         display: flex;
-                        gap: 40px;
+                        gap: 9px;
                         margin-top: 40px;
                     }
                 }
             }
         }
 
-        #add-prod{
+        #add-prod {
             /* background-color: #a45d00; */
             margin-top: 70px;
         }
-        #edit-prod{
+
+        #edit-prod {
             /* background-color: red; */
             margin-top: 70px;
+            /* margin-bottom: 20px; */
         }
+
         /* Cart Page */
-     
+
         .cart-container {
             /* background-color: #fff; */
+            /* background-image: url('https://img.freepik.com/free-photo/arrangement-black-friday-shopping-carts-with-copy-space_23-2148667047.jpg'); */
             border: 1px solid #ddd;
             border-radius: 8px;
             padding: 1.5rem;
             border: none;
-            
+            width: 100%;
+            height: 100%;
         }
 
         .cart-container .cart-title {
@@ -178,7 +210,7 @@ body {
 
         .cart-container .cart-header th {
             background-color: #008197;
-            color: #111;
+            color: #140b0b;
             font-weight: 600;
             text-transform: uppercase;
         }
@@ -220,18 +252,27 @@ body {
             border-top: 2px solid #ddd;
         }
 
-        #tb-center{
-            transform: translateX(14%);
+        #tb-center {
+            transform: translateX(5%);
         }
+        #edit-prod{
+        background-color: red;
     }
-    #con{
+    }
+
+    #con {
         margin-left: 830px;
         padding: 8px 20px 8px 9px;
         text-align: center;
         color: black;
         font-weight: 600;
     }
+
+    #edit-profile{
+        background-color: red;
+    }
 }
+    
 
 @media screen and (max-width: 990px) {
 
@@ -247,26 +288,28 @@ body {
     #tog-btn {
         margin-bottom: 7px;
     }
-     main {
+
+    main {
 
         margin-top: 55px;
         width: 100%;
 
-      section.container {
+        section.container {
             margin-top: 10px;
             display: grid;
-            grid-template-columns: auto auto auto ;
+            grid-template-columns: auto auto auto;
             width: 100%;
             /* background-color: red; */
-            overflow:auto;
+            overflow: auto;
             gap: 15px;
-      }
-        #con{
-        margin-left: 480px;
-        padding: 5px 10px;
-        text-align: center;
-        color: black;
-        font-weight: 600;
-    }
+        }
+
+        #con {
+            margin-left: 480px;
+            padding: 5px 10px;
+            text-align: center;
+            color: black;
+            font-weight: 600;
+        }
     }
 }

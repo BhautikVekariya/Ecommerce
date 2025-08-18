@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Add Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="w-50 mx-auto">
+
+    <form method="post" enctype="multipart/form-data" class="form-control" id="add-prod">
+        <h5>Add Profile</h5>
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="row my-3">
+            <div class="col-sm-4"><label for="id_{{field.name}}">{{field.name.capitalize}}</label></div>
+            <div class="col-sm-6">
+                {{field}}
+            </div>
+        </div>
+        {% endfor %}
+        <button class="btn btn-primary" type="submit">Add Profile</button>
+    </form>
+</div>
+
+{% endblock %}

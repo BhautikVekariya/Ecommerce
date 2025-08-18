@@ -5,7 +5,7 @@ Add Product
 
 
 {% block content %}
-<div class="w-50 mx-auto" >
+<div class="w-50 mx-auto text-black" >
     <h3>Are you sure you want to delete product : {{product.title}}</h3>
     <form method="post" enctype="multipart/form-data" class="form-control">
         {% csrf_token %}

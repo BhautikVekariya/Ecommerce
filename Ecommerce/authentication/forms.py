@@ -3,6 +3,8 @@
 # importing the User model from django's inbuilt authentication app
 from django.contrib.auth.models import User 
 
+from .models import Profile
+
 # importing the inbuilt forms
 from django import forms
 
@@ -58,5 +60,21 @@ class CustomRegisterForm(UserCreationForm):
             'placeholder' : 'Confirm Password'
         })
     )
+
+
+class CustomProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('first_name','profile_photo','last_name','email','user_role','phone_number','address')
+        template_name='authentication/add_profile.html'
+        success_url='/'
+
+
+class CustomProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('first_name','last_name','email','phone_number','address')
+        template_name='authentication/add_profile.html'
+        success_url='/'
 
     

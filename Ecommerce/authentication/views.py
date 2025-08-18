@@ -1,14 +1,17 @@
 from django.shortcuts import render
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.urls import reverse_lazy
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from .models import Profile
+
+from django.urls import reverse
 
 # importing custom forms
-from .forms import CustomLoginForm, CustomRegisterForm
+from .forms import CustomLoginForm, CustomRegisterForm, CustomProfileForm,CustomProfileEditForm
 
 # --- Login and Register Views ---
 class CustomLoginView(LoginView):
@@ -103,3 +106,43 @@ def set_new_password(request):
         form = SetPasswordForm(user)
 
     return render(request, 'pwd_reset/set_new_password.html', {'form': form})
+
+
+# ---------Profile---------------
+
+class AddProfile(CreateView):
+    model = Profile
+    template_name = 'profile/add_profile.html'
+    success_url = reverse_lazy('view_profile')
+    form_class = CustomProfileForm
+
+    def form_valid(self,form):
+        # print("Yeay")
+        form.instance.user=self.request.user
+        return super().form_valid(form)
+
+def view_profile(request):
+    if Profile.objects.filter(user = request.user).exists():
+        context = {
+            'profile' : Profile.objects.get(user = request.user)
+        }
+        template = 'profile/profile.html'
+        print("Found profile")
+        return render(request, template, context)
+    else:
+        print("Didn't find profile")
+        return redirect('add_profile')
+    
+
+    
+class EditProfile(UpdateView):
+
+    model = Profile
+    template_name = 'profile/add_profile.html'
+    success_url = reverse_lazy('view_profile')
+    form_class = CustomProfileEditForm
+
+    def form_valid(self,form):
+     print("Yeay")
+     form.instance.user=self.request.user
+     return super().form_valid(form)

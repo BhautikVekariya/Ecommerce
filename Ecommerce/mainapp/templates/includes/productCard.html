@@ -11,6 +11,7 @@
             <div class="card-text">
                 <span>&#8377; {{product.price}}</span>
             </div>
-            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-warning">Add to Cart</a>
+            
+            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-warning {% if user.is_staff %}disabled{% endif %}">Add to Cart</a>
         </div>
     </div>

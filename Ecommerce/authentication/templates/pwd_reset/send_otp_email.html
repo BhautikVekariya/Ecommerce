@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Send OTP to Email</h2>
+    <h2 class="text-black">Send OTP to Email</h2>
 
     {% if success %}
         <div class="alert alert-success">{{ success }}</div>
@@ -13,7 +13,7 @@
     <form method="POST">
         {% csrf_token %}
         <div class="mb-3">
-            <label for="email" class="form-label">Email Address</label>
+            <label for="email" class="form-label text-black">Email Address</label>
             <input type="email" class="form-control" name="email" id="email" required>
         </div>
         <button type="submit" class="btn btn-primary">Send OTP</button>

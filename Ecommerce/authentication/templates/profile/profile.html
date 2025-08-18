@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{{user.user_profile.full_name}}'s profile'
+{% endblock %}
+
+{% block content %}
+
+<div class="profile-container" >
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow rounded-4">
+        <div class="card-header bg-primary text-white text-center rounded-top-4">
+          <h3>{{ profile.full_name }}'s Profile</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4 text-center">
+              {% if profile.profile_photo %}
+                <img src="{{ profile.profile_photo.url }}" alt="Profile Photo" class="img-fluid rounded-circle border border-primary" style="width: 150px; height: 150px; object-fit: cover;">
+              {% else %}
+                <img src="https://via.placeholder.com/150" alt="No Profile Photo" class="img-fluid rounded-circle border">
+              {% endif %}
+            </div>
+            <div class="col-md-8 w-50 mx-auto">
+              <table class="table table-borderless" id="edit-profile">
+                <tbody>
+                  <tr>
+                    <th>Full Name:</th>
+                    <td>{{ profile.full_name }}</td>
+                  </tr>
+                  <tr>
+                    <th>Email:</th>
+                    <td>{{ profile.email }}</td>
+                  </tr>
+                  <tr>
+                    <th>Role:</th>
+                    <td>{{ profile.get_user_role_display }}</td>
+                  </tr>
+                  <tr>
+                    <th>Phone:</th>
+                    <td>{{ profile.phone_number }}</td>
+                  </tr>
+                  <tr>
+                    <th>Address:</th>
+                    <td>{{ profile.address }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-end">
+          <a href="" class="btn btn-outline-primary">Edit Profile</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

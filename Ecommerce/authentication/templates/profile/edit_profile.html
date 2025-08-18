@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Edit Profile
+{% endblock %}
+
+{% block content %}
+<div class="profedit-container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow rounded-4">
+        <div class="card-header bg-warning text-white text-center rounded-top-4">
+          <h3>Edit {{user.user_profile.user_role.capitalize}} Profile</h3>
+        </div>
+        <div class="card-body">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label for="id_first_name" class="form-label">First Name</label>
+              <input type="text" name="first_name" class="form-control" id="id_first_name" value="{{ form.first_name.value }}">
+              {{ form.first_name.errors }}
+            </div>
+
+            <div class="mb-3">
+              <label for="id_last_name" class="form-label">Last Name</label>
+              <input type="text" name="last_name" class="form-control" id="id_last_name" value="{{ form.last_name.value }}">
+              {{ form.last_name.errors }}
+            </div>
+
+            <div class="mb-3">
+              <label for="id_email" class="form-label">Email</label>
+              <input type="email" name="email" class="form-control" id="id_email" value="{{ form.email.value }}">
+              {{ form.email.errors }}
+            </div>
+
+            <div class="mb-3">
+              <label for="id_phone_number" class="form-label">Phone Number</label>
+              <input type="number" name="phone_number" class="form-control" id="id_phone_number" value="{{ form.phone_number.value }}">
+              {{ form.phone_number.errors }}
+            </div>
+
+            <div class="mb-3">
+              <label for="id_address" class="form-label">Address</label>
+              <textarea name="address" class="form-control" id="id_address">{{ form.address.value }}</textarea>
+              {{ form.address.errors }}
+            </div>
+
+            <div class="mb-3">
+              <label for="id_profile_photo" class="form-label">Profile Photo</label>
+              {{ form.profile_photo }}
+              {{ form.profile_photo.errors }}
+            </div>
+
+            <div class="text-end">
+              <button type="submit" class="btn btn-success">Save Changes</button>
+              <a href="{% url 'profile' user.id %}" class="btn btn-secondary">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

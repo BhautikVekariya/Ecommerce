@@ -13,4 +13,8 @@ urlpatterns = [
     path('verify-otp/', views.verify_otp, name='verify-otp'),
     path('set-new-password/', views.set_new_password, name='set-new-password'),
 
+    # Profile urls
+    path('profile/', views.view_profile, name = 'view_profile'),
+    path('profile/add', views.AddProfile.as_view(), name = 'add_profile'),
+
 ]
