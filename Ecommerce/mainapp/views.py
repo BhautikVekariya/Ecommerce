@@ -70,3 +70,14 @@ class EditProduct(UpdateView):
     fields='__all__'
     template_name='edit_product.html'
     success_url=reverse_lazy('homepage')
+
+def searchView(request):
+    query = request.GET.get('q')
+    result_products = Product.objects.filter(title__icontains = query)
+    context = {
+        'query' : query,
+        'products' : result_products
+    }
+    template = 'search_results.html'
+
+    return render(request, template, context)

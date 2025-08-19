@@ -16,7 +16,7 @@ body {
             height: 100%;
             background-color: gray;
         }
-
+     
         .logo-circle {
             width: 39px;
             height: 39px;
@@ -63,7 +63,7 @@ body {
                 margin-top: 20px;
                 margin-bottom: 23px;
                 width: 274px;
-                height: 350px;
+                height: 415px;
                 display: flex;
                 flex-direction: column;
 
@@ -190,6 +190,7 @@ body {
             /* margin-bottom: 20px; */
         }
 
+
         /* Cart Page */
 
         .cart-container {
@@ -255,9 +256,10 @@ body {
         #tb-center {
             transform: translateX(5%);
         }
-        #edit-prod{
-        background-color: red;
-    }
+
+        #edit-prod {
+            background-color: red;
+        }
     }
 
     #con {
@@ -268,48 +270,53 @@ body {
         font-weight: 600;
     }
 
-    #edit-profile{
+    #edit-profile {
         background-color: red;
     }
 }
-    
+
 
 @media screen and (max-width: 990px) {
+    body {
 
-    .logo-circle {
-        width: 46px;
-        height: 47px;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 2px solid white;
-        margin-top: -10px;
-    }
 
-    #tog-btn {
-        margin-bottom: 7px;
-    }
-
-    main {
-
-        margin-top: 55px;
-        width: 100%;
-
-        section.container {
-            margin-top: 10px;
-            display: grid;
-            grid-template-columns: auto auto auto;
-            width: 100%;
-            /* background-color: red; */
-            overflow: auto;
-            gap: 15px;
+        .logo-circle {
+            width: 46px;
+            height: 47px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-top: -10px;
         }
 
-        #con {
-            margin-left: 480px;
-            padding: 5px 10px;
-            text-align: center;
-            color: black;
-            font-weight: 600;
+           .none{
+            display: none;
+        }
+        #tog-btn {
+            margin-bottom: 7px;
+        }
+
+        main {
+
+            margin-top: 55px;
+            width: 100%;
+
+            section.container {
+                margin-top: 10px;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                overflow: auto;
+                gap: 15px;
+            }
+
+            #con {
+                margin-left: 480px;
+                padding: 5px 10px;
+                text-align: center;
+                color: black;
+                font-weight: 600;
+            }
         }
     }
 }

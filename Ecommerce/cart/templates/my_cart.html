@@ -51,7 +51,7 @@
                         ₹{{ item.sub_total }}
                     </td>
                     <td>
-                        <a href="" class="btn btn-sm btn-outline-danger">
+                        <a href="{% url 'rem_from_cart' item.id %}" class="btn btn-sm btn-outline-danger">
                             Remove
                         </a>
                     </td>

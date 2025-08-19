@@ -11,9 +11,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="background-color: rgb(33, 37, 41);">
 
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin: 0px 20px;">
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'aboutpage' %}">About</a>
                 </li>
@@ -35,19 +35,20 @@
 
 
             <div class="d-flex align-items-center gap-2">
-                <form class="d-flex me-3" role="search">
-                    <input class="form-control me-2" id="search" type="search" placeholder="Search"
-                        aria-label="Search" />
-                    <button class="btn btn-primary" type="submit">Search</button>
+            
+                <form class="d-flex me-3" role="search" method="get" action="{% url 'search_products' %}">
+                    <input class="form-control me-2 none" id="search" type="search" placeholder="Search"
+                        aria-label="Search" name="q" value="{{query}}" />
+                    <button class="btn btn-outline-primary none" type="submit">Search</button>
                 </form>
-
+              
                 {% if user.is_authenticated %}
                 {{user.username.capitlize}}
                 <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
-                    <button class="btn btn-danger" id="logout" type="submit">Logout</button>
+                    <button class="btn btn-danger none" id="logout" type="submit">Logout</button>
                 </form>
-                <a href="{% url 'view_profile' %}" class="btn btn-secondary">Profile</a>
+                <a href="{% url 'view_profile' %}" class="btn btn-secondary none">Profile</a>
                 {% else %}
                 <a href="{% url 'signup' %}" class="btn btn-secondary">Register</a>
                 <a href="{% url 'signin' %}" class="btn btn-warning">Login</a>
