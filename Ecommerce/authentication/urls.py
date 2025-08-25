@@ -16,5 +16,6 @@ urlpatterns = [
     # Profile urls
     path('profile/', views.view_profile, name = 'view_profile'),
     path('profile/add', views.AddProfile.as_view(), name = 'add_profile'),
+    path('profile/edit<int:pk>', views.EditProfile.as_view(), name = 'edit_profile'),
 
 ]

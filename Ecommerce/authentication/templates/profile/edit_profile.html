@@ -5,11 +5,11 @@ Edit Profile
 {% endblock %}
 
 {% block content %}
-<div class="profedit-container">
+<div class="profedit-container ">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <div class="card shadow rounded-4">
-        <div class="card-header bg-warning text-white text-center rounded-top-4">
+      <div class="card shadow rounded-4 w-50 mx-auto mb-5">
+        <div class="card-header bg-light text-dark text-center rounded-top-4">
           <h3>Edit {{user.user_profile.user_role.capitalize}} Profile</h3>
         </div>
         <div class="card-body">
@@ -54,7 +54,7 @@ Edit Profile
 
             <div class="text-end">
               <button type="submit" class="btn btn-success">Save Changes</button>
-              <a href="{% url 'profile' user.id %}" class="btn btn-secondary">Cancel</a>
+              <a href="{% url 'view_profile' %}" class="btn btn-secondary">Cancel</a>
             </div>
           </form>
         </div>

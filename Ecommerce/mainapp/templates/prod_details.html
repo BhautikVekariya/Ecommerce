@@ -24,9 +24,12 @@
 
 
             <div id="button">
-                <a href="{% url 'add_product'  %}" class="col-sm-4 btn btn-primary">Add Product</a>
+                {%if user.is_staff %}
                 <a href="{% url 'edit_product' product.pk %}" class="col-sm-4 btn btn-warning">Edit Product</a>
                 <a href="{% url 'deleteproduct' product.pk %}" class="col-sm-4 btn btn-danger">Delete Product</a>
+                {% else %}
+                <a href="{% url 'add_product'  %}" class="col-sm-4 btn btn-primary">Add Product</a>
+                {% endif %}
             </div>
 
         </div>

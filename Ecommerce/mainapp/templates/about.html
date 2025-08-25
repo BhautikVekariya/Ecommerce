@@ -1,68 +1,33 @@
 {% extends 'base.html' %}
+
 {% block title %}
 About
 {% endblock %}
 
 {% block content %}
-<section class="py-5 bg-light">
-  <div class="container my-2">
-
-  <!-- About content -->
-  <div class="about shadow border-0 p-4 w-100 ">
-    <h1 class="fw-bold text-center mb-4">About ByCart</h1>
-    <p class="lead text-center text-muted mb-5">ByCart is your trusted online marketplace — connecting you with top-quality products, unbeatable prices, and a seamless shopping experience from the comfort of your home.</p>
-
-    <div class="row g-5 align-items-center">
-      <div class="col-md-6">
-        <h3>Who We Are</h3>
-        <p class="text-muted">Founded in 2025, ByCart started with a vision to simplify online shopping. Today, we are home to thousands of curated products ranging from electronics and fashion to groceries and home essentials.</p>
-
-        <h3>Our Mission</h3>
-        <p class="text-muted">To bring convenience, quality, and trust to every transaction, ensuring that our customers enjoy a smooth, reliable, and enjoyable shopping journey every time.</p>
-      </div>
-      <div class="col-md-6">
-        <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?q=80&w=800&auto=format&fit=crop" class="img-fluid rounded shadow" alt="ByCart mission image">
-      </div>
-    </div>
-
-    <hr class="my-5">
-
-    <div class="row text-center">
-      <div class="col-md-4">
-        <h4 class="fw-bold">50k+</h4>
-        <p class="text-muted">Satisfied Customers</p>
-      </div>
-      <div class="col-md-4">
-        <h4 class="fw-bold">500+</h4>
-        <p class="text-muted">Trusted Sellers</p>
-      </div>
-      <div class="col-md-4">
-        <h4 class="fw-bold">4.9 ★</h4>
-        <p class="text-muted">Customer Rating</p>
-      </div>
-    </div>
-
-    <hr class="my-5">
-
-    <div class="row g-4">
-      <div class="col-md-6">
-        <h3>Why Choose ByCart?</h3>
-        <ul class="text-muted">
-          <li>Fast & secure nationwide delivery</li>
-          <li>Easy returns & refunds</li>
-          <li>Exclusive deals and offers</li>
-          <li>24/7 customer support</li>
-        </ul>
-      </div>
-      <div class="col-md-6">
-        <h3>Contact Us</h3>
-        <p class="text-muted">Have questions or need assistance? We’re always here to help you.</p>
-        <a href="#contact" class="btn btn-danger">Get in Touch</a>
-      </div>
+<section class="container py-5">
+  <div class="row justify-content-center text-dark">
+    <div class="col-lg-8 text-center">
+      <h2 class="mb-4 fw-bold">Welcome to Ecommerce</h2>
+      <p >
+        At <strong>Ecommerce</strong>, we believe online shopping should be simple, exciting, and tailored to your lifestyle. 
+        From the latest fashion to electronics, home essentials, and unique finds — everything you need is just a click away.
+      </p>
+      <p class="mt-4">
+        Founded in 2025, <strong>Ecommerce</strong> has grown into a reliable online marketplace with a mission to connect 
+        shoppers to high-quality products at the best prices. Our product catalog is continuously updated with new arrivals, 
+        trending items, and seasonal collections.
+      </p>
+      <p class="mt-4">
+        We work with trusted brands and sellers to ensure every item meets our standards of quality and service. 
+        Our platform is fast, secure, and optimized for both desktop and mobile, making it easy to shop anytime, anywhere.
+      </p>
+      <p class="mt-4">
+        Be part of our growing community and discover why thousands of shoppers choose <strong>Ecommerce</strong> every day 
+        for convenience, value, and trust.
+      </p>
+      <a href="{% url 'products' %}" class="btn btn-primary mt-4">Start Shopping</a>
     </div>
   </div>
-</div>
-
 </section>
-
-{% endblock %}
+{% endblock %}

@@ -73,7 +73,7 @@ class CustomProfileForm(forms.ModelForm):
 class CustomProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('first_name','last_name','email','phone_number','address')
+        fields = ('first_name','last_name','email','phone_number','address','profile_photo')
         template_name='authentication/add_profile.html'
         success_url='/'
 

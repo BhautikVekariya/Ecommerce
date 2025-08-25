@@ -28,7 +28,7 @@ class Profile(models.Model):
     first_name=models.CharField(max_length=100)
     last_name=models.CharField(max_length=100)
     user=models.OneToOneField (User,on_delete=models.CASCADE,related_name='user_profile')
-    user_role=models.CharField(choices=USER_TYPE)
+    user_role=models.CharField(choices=USER_TYPE, max_length=6)
     profile_photo = models.ImageField(upload_to='profiles/', null=True, blank=True)  
     phone_number=models.PositiveIntegerField(null=True)
     address=models.TextField(null=True)

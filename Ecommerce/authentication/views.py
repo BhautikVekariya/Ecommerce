@@ -138,7 +138,7 @@ def view_profile(request):
 class EditProfile(UpdateView):
 
     model = Profile
-    template_name = 'profile/add_profile.html'
+    template_name = 'profile/edit_profile.html'
     success_url = reverse_lazy('view_profile')
     form_class = CustomProfileEditForm
 
