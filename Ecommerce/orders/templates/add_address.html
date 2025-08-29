@@ -5,7 +5,14 @@
 {% endblock %}
 
 {% block content %}
-<form method="post">
+<form method="post" style="    width: 500px;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="btn btn-success">Add Address</button>

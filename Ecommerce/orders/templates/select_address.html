@@ -8,11 +8,11 @@
 
 <form method="post">
     {% csrf_token %}
-    <h3>Select an Address</h3>
+    <h3 style="color: black;">Select an Address</h3>
     <ul>
         {% for address in addresses %}
         <li>
-            <label>
+            <label style="color: black;">
                 <input type="radio" name="address" value="{{ address.id }}">
                 {{ address.full_name }}, {{ address.address_line1 }}, {{ address.city }}, {{ address.state }} - {{ address.pincode }}
             </label>

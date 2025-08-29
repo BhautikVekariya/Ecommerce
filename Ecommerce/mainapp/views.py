@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from django.views.generic import CreateView, ListView, DetailView,UpdateView,DeleteView
-
+from authentication.models import Profile
 from . models import Product
 from django.urls import reverse_lazy
 
@@ -21,7 +21,11 @@ class HomeView(ListView):
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
-        context['seller'] = True if self.request.user.user_profile.user_role == 'seller' else False
+        try:
+            profile = Profile.objects.filter(user = self.request.user)
+            context['seller'] = True if self.request.user.user_profile.user_role == 'seller' else False
+        except:
+            pass
         return context
 
 def aboutView(request):
@@ -44,8 +48,13 @@ def productsView(request):
     template = 'products.html'
     context = {
         'products' : Product.objects.all(),
-        'seller' : True if request.user.user_profile.user_role == 'seller' else False
+        
     }
+    try:
+            profile = Profile.objects.filter(user =request.user)
+            context['seller'] = True if request.user.user_profile.user_role == 'seller' else False
+    except:
+            pass
     return render(request, template, context)
 
 
@@ -58,7 +67,11 @@ class AddProduct(CreateView):
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
-        context['seller'] = True if self.request.user.user_profile.user_role == 'seller' else False
+        try:
+            profile = Profile.objects.filter(user = self.request.user)
+            context['seller'] = True if self.request.user.user_profile.user_role == 'seller' else False
+        except:
+            pass
         return context
     
     def form_valid(self, form):
@@ -72,7 +85,8 @@ class ProductDetails(DetailView):
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
-        context['seller'] = True if self.request.user.user_profile.user_role == 'seller' else False
+        if self.request.user.user_profile:
+            context['seller'] = True if self.request.user.user_profile.user_role == 'seller' else False
         return context
 
 class UpdateProduct(UpdateView):

@@ -1,4 +1,4 @@
- 
+
     function updateCart(actionUrl, cartItemId, isAdd, csrf_token) {
         fetch(actionUrl, {
             method: 'POST',
