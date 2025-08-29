@@ -17,6 +17,9 @@
             </h2>
             <p>
                 {{product.desc}}
+                {% if product.seller %}
+                <small>sold by : {{product.seller.user_profile.full_name}}</small>
+                {% endif %}
             </p>
             <p>
                 &#8377;{{product.price}}
@@ -24,12 +27,16 @@
 
 
             <div id="button">
-                {%if user.is_staff %}
+                
+                {% if product.seller == user   %}
                 <a href="{% url 'edit_product' product.pk %}" class="col-sm-4 btn btn-warning">Edit Product</a>
                 <a href="{% url 'deleteproduct' product.pk %}" class="col-sm-4 btn btn-danger">Delete Product</a>
                 {% else %}
+                {% if not seller %}
                 <a href="{% url 'add_product'  %}" class="col-sm-4 btn btn-primary">Add Product</a>
                 {% endif %}
+                {% endif %}
+                
             </div>
 
         </div>

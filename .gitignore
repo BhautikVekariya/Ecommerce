@@ -1,5 +1,8 @@
 virt/
-
+.env
 secrets.txt
 
 db.sqlite3
+
+__pycache__/
+*.pyc

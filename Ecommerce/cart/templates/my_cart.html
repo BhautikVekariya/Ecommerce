@@ -65,7 +65,7 @@
                         ₹<span id="total-price">{{ total_price }}</span>
                     </td>
                     <td>
-                        <a href="" class="btn btn-warning w-100 fw-bold">
+                        <a href="{% url 'create_order' %}" class="btn btn-warning w-100 fw-bold">
                             Proceed to Buy
                         </a>
 
@@ -78,7 +78,7 @@
         
             <!-- Continue Shopping Button after table -->
         <div class="text-center mt-2 ">
-            <a href="{% url 'homepage' %}" class="btn btn-primary position-absoluted end-10  " id="con">
+            <a href="{% url 'homepage' %}" class="btn btn-primary position-absoluted end-10" id="con">
                 Continue Shopping
             </a>
         </div>

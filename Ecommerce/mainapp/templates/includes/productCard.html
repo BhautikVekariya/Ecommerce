@@ -7,11 +7,14 @@
                 <a href="{% url 'prod_details' product.pk %}">
                 {{product.title}}
                 </a>
+                
             </div>
             <div class="card-text">
                 <span>&#8377; {{product.price}}</span>
             </div>
             
-            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-warning {% if user.is_staff %}disabled{% endif %}">Add to Cart</a>
+            {% if not seller %}
+            <a href="{% url 'add_to_cart' product.id %}" class="btn {% if user.is_staff  %}btn-secondary disabled {% else %}btn-primary{% endif %}">Add to Cart</a>
+            {% endif %}
         </div>
     </div>

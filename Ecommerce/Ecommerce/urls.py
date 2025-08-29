@@ -22,12 +22,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', include('mainapp.urls')),
-    path('cart/',include('cart.urls')),
-     path('accounts/', include('authentication.urls')),
+    path('seller/', include('seller.urls')),
+
+    path('', include('orders.urls')),
+    path('',include('payments.urls')),
+    
+    path('cart/', include('cart.urls')),
+    path('accounts/', include('authentication.urls')),
     path('accounts/', include('django.contrib.auth.urls'))
 ]
-
 if settings.DEBUG == True:
     urlpatterns += static(settings.MEDIA_URL, document_root =settings.MEDIA_ROOT)

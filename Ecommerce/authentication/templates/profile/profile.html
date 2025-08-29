@@ -9,17 +9,25 @@
 <div class="profile-container">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <div class="card shadow rounded-4 mx-auto">
-        <div class="card-header bg-light text-dark text-center rounded-top-4">
+      <div class="shadow rounded-4 mx-auto" style="background-color: #212529;
+    width: 510px;
+    margin-top: 14px;
+    border-radius: 17px;
+    height: 315px;
+">
+        <div class="card-header bg-light text-dark text-center rounded-top-4" style="padding: 3px;
+    width: 510px;
+  ">
           <h3>{{ profile.full_name }}'s Profile</h3>
         </div>
         <div class="card-body">
           <div class="row">
             <div class="col-md-4 text-center ">
               {% if profile.profile_photo %}
-                <img src="{{ profile.profile_photo.url }}" alt="Profile Photo" class="img-fluid rounded-circle border border-primary " id="profile-photo">
+              <img src="{{ profile.profile_photo.url }}" alt="Profile Photo"
+                class="img-fluid rounded-circle border border-primary " id="profile-photo">
               {% else %}
-                <img src="https://via.placeholder.com/150" alt="No Profile Photo" class="img-fluid rounded-circle border">
+              <img src="https://via.placeholder.com/150" alt="No Profile Photo" class="img-fluid rounded-circle border">
               {% endif %}
             </div>
             <div class="col-md-8">
@@ -51,7 +59,8 @@
           </div>
         </div>
         <div class="card-footer text-end">
-          <a href="{% url 'edit_profile' profile.pk %}" class="btn btn-outline-primary">Edit Profile</a>
+          <a href="{% url 'edit_profile' profile.pk %}" class="btn btn-outline-primary" style="margin-right: 10px;">Edit
+            Profile</a>
         </div>
       </div>
     </div>

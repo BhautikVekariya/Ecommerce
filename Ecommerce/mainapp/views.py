@@ -4,6 +4,8 @@ from django.views.generic import CreateView, ListView, DetailView,UpdateView,Del
 
 from . models import Product
 from django.urls import reverse_lazy
+
+from .forms import ProductForm
 # Create your views here.
 # def homeView(request):
 #     template = 'home.html'
@@ -16,6 +18,11 @@ class HomeView(ListView):
     model = Product
     template_name = 'home.html'
     context_object_name = 'products'
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['seller'] = True if self.request.user.user_profile.user_role == 'seller' else False
+        return context
 
 def aboutView(request):
     template = 'about.html'
@@ -36,8 +43,8 @@ def contactView(request):
 def productsView(request):
     template = 'products.html'
     context = {
-        'products' : Product.objects.all()
-
+        'products' : Product.objects.all(),
+        'seller' : True if request.user.user_profile.user_role == 'seller' else False
     }
     return render(request, template, context)
 
@@ -46,13 +53,27 @@ def productsView(request):
 class AddProduct(CreateView):
     model = Product
     template_name = 'add_product.html'
-    fields = '__all__'
+    form_class = ProductForm
     success_url = '/'
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['seller'] = True if self.request.user.user_profile.user_role == 'seller' else False
+        return context
+    
+    def form_valid(self, form):
+        form.instance.seller = self.request.user
+        return super().form_valid(form)
 
 class ProductDetails(DetailView):
     model = Product
     template_name = 'prod_details.html'
     context_object_name = 'product'
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['seller'] = True if self.request.user.user_profile.user_role == 'seller' else False
+        return context
 
 class UpdateProduct(UpdateView):
     model = Product

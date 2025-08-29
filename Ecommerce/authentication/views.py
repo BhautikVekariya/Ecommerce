@@ -18,6 +18,17 @@ class CustomLoginView(LoginView):
     template_name = 'login.html'
     form_class = CustomLoginForm
 
+    def get_success_url(self):
+        user = self.request.user
+        try:
+            profile = user.user_profile
+        except Profile.DoesNotExist:
+            return reverse_lazy('add_profile')  # force profile creation
+
+        # redirect based on role
+        
+        return reverse_lazy('view_profile')  # fallback
+
 class CustomRegisterView(CreateView):
     form_class = CustomRegisterForm
     template_name = 'register.html'
