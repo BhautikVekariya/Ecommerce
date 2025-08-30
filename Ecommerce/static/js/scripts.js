@@ -1,31 +1,73 @@
-
-    function updateCart(actionUrl, cartItemId, isAdd, csrf_token) {
-        fetch(actionUrl, {
+document.addEventListener('DOMContentLoaded', function() {
+    // Get CSRF token function
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    
+    const csrftoken = getCookie('csrftoken');
+    
+    // Add event listeners to all quantity buttons
+    document.querySelectorAll('.increase-btn, .decrease-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = this.getAttribute('data-item-id');
+            const isAdd = this.classList.contains('increase-btn');
+            
+            updateQuantity(itemId, isAdd);
+        });
+    });
+    
+    function updateQuantity(itemId, isAdd) {
+        const url = `/cart/update-quantity/${itemId}/`;
+        
+        fetch(url, {
             method: 'POST',
             headers: {
-                'X-CSRFToken': csrf_token ,
-                'Content-Type': 'application/json'
-            }
+                'X-CSRFToken': csrftoken,
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `is_add=${isAdd}`
         })
         .then(response => response.json())
         .then(data => {
-            const quantityElement = document.querySelector(`#quantity-${cartItemId}`);
-            const totalPriceElement = document.querySelector(`#total-price-${cartItemId}`);
-            const overallTotalElement = document.querySelector('#overall-total');
-            
-            if (data.quantity > 0) {
-                // Update quantity and total price for the cart item
-                quantityElement.textContent = data.quantity;
-                totalPriceElement.textContent = `${data.total_price.toFixed(1)}`;
-            } else {
-                // Remove the cart item from the DOM if quantity is 0
-                const cartItemElement = document.querySelector(`#cart-item-${cartItemId}`);
-                cartItemElement.remove();
+            if (data.status === 'success') {
+                // Update quantity
+                document.getElementById(`quantity-${itemId}`).textContent = data.quantity;
+                
+                // Update subtotal
+                document.getElementById(`subtotal-${itemId}`).textContent = `₹${data.sub_total}`;
+                
+                // Update total price
+                document.getElementById('total-price').textContent = data.overall_total;
+            } else if (data.status === 'removed') {
+                // Remove item from DOM
+                document.getElementById(`item-${itemId}`).remove();
+                
+                // Update total price
+                document.getElementById('total-price').textContent = data.overall_total;
+                
+                // Check if cart is empty
+                if (document.querySelectorAll('.cart-row').length === 0) {
+                    window.location.reload();
+                }
+            } else if (data.status === 'error') {
+                console.error('Error:', data.message);
+                alert('An error occurred: ' + data.message);
             }
-    
-            // Update overall total price
-            overallTotalElement.textContent = `${Number(data.overall_total).toFixed(2)}`;
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        });
     }
-    
+});
