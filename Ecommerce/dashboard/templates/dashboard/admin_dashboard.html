@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+
+{{ user.username|capfirst }}'s Cart
+
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-dark">Admin Dashboard</h2>
+
+    <!-- Summary Cards -->
+     <div class="container"></div>
+    <div class="row text-white mb-4">
+        <div class="col-sm-4 ">
+            <div class="card bg-danger shadow-sm w-100">
+                <div class="card-body text-center">
+                    <h3>{{ total_users }}</h3>
+                    <p>Total Customers</p>
+                    <i class="bi bi-people-fill fs-1"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card bg-warning shadow-sm w-100">
+                <div class="card-body text-center">
+                    <h3>{{ total_products }}</h3>
+                    <p>Total Products</p>
+                    <i class="bi bi-basket-fill fs-1"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card bg-primary shadow-sm w-100">
+                <div class="card-body text-center">
+                    <h3>{{ total_orders }}</h3>
+                    <p>Total Orders</p>
+                    <i class="bi bi-bar-chart-fill fs-1"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Bookings Table -->
+    <div class="card shadow-sm w-100">
+        <div class="card-header bg-primary text-white">
+            Recent Bookings
+        </div>
+        <div class="card-body table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>Customer Mobile</th>
+                        <th>Shipment Address</th>
+                        <th>Product Name</th>
+                        <th>Product Picture</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in recent_orders %}
+                    <tr>
+                        <td>{{ order.user.username }}</td>
+                        <td>{{ order.user.profile.phone|default:"-" }}</td>
+                        <td>{{ order.shipping_address|default:"-" }}</td>
+                        <td>{{ order.product.name }}</td>
+                        <td>
+                            {% if order.product.image %}
+                            <img src="{{ order.product.image.url }}" alt="{{ order.product.name }}" width="50"
+                                height="50" class="rounded shadow-sm">
+                            {% else %}
+                            <span class="text-muted">No image</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if order.status == "Pending" %}
+                            <span class="badge bg-info">Pending</span>
+                            {% elif order.status == "Order Confirmed" %}
+                            <span class="badge bg-primary">Order Confirmed</span>
+                            {% elif order.status == "Out for Delivery" %}
+                            <span class="badge bg-warning text-dark">Out for Delivery</span>
+                            {% elif order.status == "Delivered" %}
+                            <span class="badge bg-success">Delivered</span>
+                            {% else %}
+                            <span class="badge bg-secondary">{{ order.status }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">No recent bookings</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

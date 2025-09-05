@@ -18,37 +18,40 @@
                     <a class="nav-link active" href="{% url 'aboutpage' %}">About</a>
                 </li>
                 {% if user.is_authenticated %}
-                
+
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'products' %}">Products</a>
                 </li>
-                {% if seller %}
+
+                
+                {% if user.is_staff or user.is_superuser %}
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'add_product' %}">Add Product</a>
                 </li>
-                <li class="nav-item">
+               
+                {% else %}
+                 {% if not user.is_superuser and not user.is_staff %}
+                  <li class="nav-item">
                     <a class="nav-link active" href="{% url 'my_products' %}">My Products</a>
                 </li>
-                {% else %}
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'my_cart' %}">{{user.username.capitalize}}'s Cart</a>
                 </li>
-                {% endif %}
-             
-                
-               
+                {%endif%}
                 {%endif %}
+                {% endif %}
+
             </ul>
 
 
             <div class="d-flex align-items-center gap-2">
-            
+
                 <form class="d-flex me-3" role="search" method="get" action="{% url 'search_products' %}">
                     <input class="form-control me-2 none" id="search" type="search" placeholder="Search here"
                         aria-label="Search" name="q" value="{{query}}" />
                     <button class="btn btn-outline-primary none" type="submit">Search</button>
                 </form>
-              
+
                 {% if user.is_authenticated %}
                 {{user.username.capitlize}}
                 <form method="post" action="{% url 'logout' %}">

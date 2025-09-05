@@ -6,7 +6,9 @@
 
 {% block content %}
 
-<form method="post">
+<form method="post" style="width: 500px;
+    margin-top: 98px;
+    margin-left: 16px;">
     {% csrf_token %}
     <h3 style="color: black;">Select an Address</h3>
     <ul>
@@ -21,7 +23,7 @@
     </ul>
     <button type="submit" class="btn btn-primary">Select Address</button>
 </form>
-<a href="{% url 'add_address'  %}?next={{request.path}}" class="btn btn-secondary">Add address</a>
+<a href="{% url 'add_address'  %}?next={{request.path}}" class="btn btn-secondary" style="margin-left: 16px; margin-top: 10px;">Add address</a>
 
 
 {% endblock %}

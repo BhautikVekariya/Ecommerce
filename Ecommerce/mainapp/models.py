@@ -4,6 +4,11 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Product(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,related_name="uploaded_products",null=True,blank=True)
+    seller = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="products_selling")
     title= models.CharField(max_length=200) # This becomes VARCHAR(200)
     price = models.PositiveIntegerField()  # This becomes INT with check value >=0
     desc = models.TextField(max_length=500, null=True)

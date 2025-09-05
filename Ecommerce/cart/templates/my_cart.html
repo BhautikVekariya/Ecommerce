@@ -2,11 +2,14 @@
 {% load static %}
 
 {% block title %}
+
 {{ user.username|capfirst }}'s Cart
+
 {% endblock %}
 
 {% block content %}
-    <h2 class="mb-4 cart-title text-center text-dark"> Shopping Cart</h2>
+
+<h2 class="mb-4 cart-title text-center text-dark"> Shopping Cart</h2>
 <section class="cart-container container my-4 m-auto">
     <div class="table-responsive" id="tb-center">
         <table class="table table-borderless align-middle text-center">
@@ -38,15 +41,16 @@
                     <td class="cart-price">₹{{ item.product.price }}</td>
                     <td>
                         <div class="cart-quantity d-flex align-items-center">
-                            <button class="btn btn-sm btn-outline-secondary decrease-btn m-10" style="transform: translate(35px, 0px);" 
-                                    data-item-id="{{ item.id }}">
+                            <button class="btn btn-sm btn-outline-secondary decrease-btn m-10"
+                                style="transform: translate(35px, 0px);" data-item-id="{{ item.id }}">
                                 -
                             </button>
-                            <span class="mx-2 item-quantity" id="quantity-{{item.id}}" style="transform: translate(35px, 0px);">
+                            <span class="mx-2 item-quantity" id="quantity-{{item.id}}"
+                                style="transform: translate(35px, 0px);">
                                 {{ item.quantity }}
                             </span>
-                            <button class="btn btn-sm btn-outline-secondary increase-btn" 
-                                    data-item-id="{{ item.id }}" style="transform: translate(35px, 0px);">
+                            <button class="btn btn-sm btn-outline-secondary increase-btn" data-item-id="{{ item.id }}"
+                                style="transform: translate(35px, 0px);">
                                 +
                             </button>
                         </div>
@@ -76,7 +80,7 @@
                 </tr>
             </tfoot>
         </table>
-        
+
         <div class="text-center mt-2 ">
             <a href="{% url 'homepage' %}" class="btn btn-primary position-absoluted end-10" id="con">
                 Continue Shopping
@@ -84,4 +88,5 @@
         </div>
     </div>
 </section>
+
 {% endblock %}

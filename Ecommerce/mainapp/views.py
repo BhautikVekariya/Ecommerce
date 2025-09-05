@@ -4,7 +4,7 @@ from django.views.generic import CreateView, ListView, DetailView,UpdateView,Del
 from authentication.models import Profile
 from . models import Product
 from django.urls import reverse_lazy
-
+from django.contrib.auth.decorators import login_required
 from .forms import ProductForm
 # Create your views here.
 # def homeView(request):
@@ -116,3 +116,9 @@ def searchView(request):
     template = 'search_results.html'
 
     return render(request, template, context)
+
+
+@login_required
+def my_products(request):
+    products = Product.objects.filter(user=request.user)  # only products by logged-in user
+    return render(request, "my_products.html", {"products": products})

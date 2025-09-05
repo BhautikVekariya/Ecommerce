@@ -1,0 +1,52 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Welcome {{ request.user.username|capfirst }}</h2>
+
+  <!-- Orders Section -->
+  <h3>Your Orders</h3>
+  <div class="list-group mb-4">
+    {% for order in orders %}
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>Order #{{ order.id }}</strong> - 
+          <span class="badge bg-info text-dark">{{ order.status }}</span>
+        </div>
+        <span class="text-success fw-bold">₹{{ order.total_price }}</span>
+      </div>
+    {% empty %}
+      <div class="list-group-item text-muted">No orders yet.</div>
+    {% endfor %}
+  </div>
+
+  <!-- Cart Section -->
+  <h3>Your Cart</h3>
+  <div class="row">
+    {% for item in cart_items %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          {% if item.product.image %}
+            <img src="{{ item.product.image.url }}" 
+                 class="card-img-top" 
+                 alt="{{ item.product.name }}" 
+                 style="height: 200px; object-fit: cover;">
+          {% endif %}
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ item.product.name }}</h5>
+            <p class="card-text">{{ item.product.description|truncatewords:20 }}</p>
+            <p class="card-text"><strong>Quantity:</strong> {{ item.quantity }}</p>
+            <div class="mt-auto">
+              <a href="{% url 'product_detail' item.product.id %}" 
+                 class="btn btn-primary btn-sm w-100 mb-2">View Product</a>
+              
+              <form method="post" action="{% url 'remove_from_cart' item.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm w-100">Remove</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-muted">Your cart is empty.</p>
+    {% endfor %}
+  </div>
+</div>
