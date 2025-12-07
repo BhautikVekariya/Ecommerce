@@ -1,18 +1,11 @@
 from django.shortcuts import render
-
-from django.views.generic import CreateView, ListView, DetailView,UpdateView,DeleteView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from authentication.models import Profile
-from . models import Product
+from .models import Product
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from .forms import ProductForm
-# Create your views here.
-# def homeView(request):
-#     template = 'home.html'
-#     context={
-#        'products': Product.objects.all()
-#     }
-#     return  render(request, template, context)
+
 
 class HomeView(ListView):
     model = Product
@@ -20,43 +13,46 @@ class HomeView(ListView):
     context_object_name = 'products'
 
     def get_context_data(self, **kwargs):
-        context =  super().get_context_data(**kwargs)
-        try:
-            profile = Profile.objects.filter(user = self.request.user)
-            context['seller'] = True if self.request.user.user_profile.user_role == 'seller' else False
-        except:
-            pass
+        context = super().get_context_data(**kwargs)
+
+        # SAFE PROFILE ACCESS
+        profile = getattr(self.request.user, 'user_profile', None)
+        context['seller'] = profile.user_role == 'seller' if profile else False
+
         return context
 
+
 def aboutView(request):
-    template = 'about.html'
-    context={
-       
-    }
-    return  render(request, template, context)
+    return render(request, 'about.html')
 
 
 def contactView(request):
-    template = 'contact.html'
-    context = {
-
-    }
-    return render(request, template, context)
+    return render(request, 'contact.html')
 
 
 def productsView(request):
-    template = 'products.html'
     context = {
-        'products' : Product.objects.all(),
-        
+        'products': Product.objects.all(),
     }
-    try:
-            profile = Profile.objects.filter(user =request.user)
-            context['seller'] = True if request.user.user_profile.user_role == 'seller' else False
-    except:
-            pass
-    return render(request, template, context)
 
+    # SAFE PROFILE ACCESS
+    profile = getattr(request.user, 'user_profile', None)
+    context['seller'] = profile.user_role == 'seller' if profile else False
+
+    return render(request, 'products.html', context)
+
+
+@login_required
+def myproductsview(request):
+    template = 'my_products.html'
+    products = Product.objects.filter(user=request.user)
+
+    context = {'products': products}
+
+    profile = getattr(request.user, 'user_profile', None)
+    context['user'] = profile.user_role == 'user' if profile else False
+
+    return render(request, template, context)
 
 
 class AddProduct(CreateView):
@@ -66,17 +62,18 @@ class AddProduct(CreateView):
     success_url = '/'
 
     def get_context_data(self, **kwargs):
-        context =  super().get_context_data(**kwargs)
-        try:
-            profile = Profile.objects.filter(user = self.request.user)
-            context['seller'] = True if self.request.user.user_profile.user_role == 'seller' else False
-        except:
-            pass
+        context = super().get_context_data(**kwargs)
+
+        # SAFE PROFILE ACCESS
+        profile = getattr(self.request.user, 'user_profile', None)
+        context['seller'] = profile.user_role == 'seller' if profile else False
+
         return context
-    
+
     def form_valid(self, form):
         form.instance.seller = self.request.user
         return super().form_valid(form)
+
 
 class ProductDetails(DetailView):
     model = Product
@@ -84,10 +81,14 @@ class ProductDetails(DetailView):
     context_object_name = 'product'
 
     def get_context_data(self, **kwargs):
-        context =  super().get_context_data(**kwargs)
-        if self.request.user.user_profile:
-            context['seller'] = True if self.request.user.user_profile.user_role == 'seller' else False
+        context = super().get_context_data(**kwargs)
+
+        # SAFE PROFILE ACCESS
+        profile = getattr(self.request.user, 'user_profile', None)
+        context['seller'] = profile.user_role == 'seller' if profile else False
+
         return context
+
 
 class UpdateProduct(UpdateView):
     model = Product
@@ -95,30 +96,27 @@ class UpdateProduct(UpdateView):
     fields = '__all__'
     success_url = '/'
 
+
 class DeleteProduct(DeleteView):
     model = Product
     template_name = 'delete_product.html'
     success_url = '/'
 
+
 class EditProduct(UpdateView):
-    model=Product
-    fields='__all__'
-    template_name='edit_product.html'
-    success_url=reverse_lazy('homepage')
+    model = Product
+    fields = '__all__'
+    template_name = 'edit_product.html'
+    success_url = reverse_lazy('homepage')
+
 
 def searchView(request):
     query = request.GET.get('q')
-    result_products = Product.objects.filter(title__icontains = query)
+    result_products = Product.objects.filter(title__icontains=query)
+
     context = {
-        'query' : query,
-        'products' : result_products
+        'query': query,
+        'products': result_products
     }
-    template = 'search_results.html'
 
-    return render(request, template, context)
-
-
-@login_required
-def my_products(request):
-    products = Product.objects.filter(user=request.user)  # only products by logged-in user
-    return render(request, "my_products.html", {"products": products})
+    return render(request, 'search_results.html', context)

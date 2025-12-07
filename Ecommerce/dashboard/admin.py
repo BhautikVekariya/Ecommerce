@@ -1,12 +1,18 @@
 from django.contrib import admin
-from .models import Product, Order, CartItem
+from .models import Product, Order, CartItem, Category
+
+# ---- Category Admin ----
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ("id", "name", "description")
+    search_fields = ("name",)
 
 # ---- Product Admin ----
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "price", "stock")
-    search_fields = ("name",)
-    list_filter = ("stock",)
+    list_display = ("id", "name", "category", "price", "stock")
+    search_fields = ("name", "category__name")
+    list_filter = ("category",)
 
 # ---- Order Admin ----
 @admin.register(Order)
@@ -21,3 +27,4 @@ class CartItemAdmin(admin.ModelAdmin):
     list_display = ("id", "user", "product", "quantity")
     list_filter = ("user",)
     search_fields = ("product__name", "user__username")
+    autocomplete_fields = ("product", "user")

@@ -9,12 +9,11 @@ My Products
     <h2 class="mb-3">My Products</h2>
     <div class="row">
         {% for product in products %}
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-3 ">
                 {% include 'includes/productCard.html' %}
             </div>
-        {% empty %}
-            <p>You haven’t added any products yet.</p>
         {% endfor %}
     </div>
 </section>
+
 {% endblock %}

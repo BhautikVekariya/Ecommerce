@@ -1,13 +1,12 @@
 from django.shortcuts import render
 from mainapp.models import Product
-# Create your views here.
 
 def myProducts(request):
-    seller = request.user 
-    products = Product.objects.filter(seller = seller)
-    template = 'products.html'
+    profile = getattr(request.user, 'user_profile', None)
+
     context = {
-        'products' : products,
-        'seller' : True if request.user.user_profile.user_role == 'seller' else False
+        'products': Product.objects.filter(seller=request.user),
+        'seller': profile.user_role == 'seller' if profile else False
     }
-    return render(request, template, context)
+
+    return render(request, 'seller/my_products.html', context)

@@ -55,7 +55,7 @@ def send_otp_email(request):
 
             subject = "Your OTP Code"
             message = f"Your OTP is: {otp}\nThis code will expire in 10 minutes."
-            send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False)
+            send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=True)
 
             # Redirect to OTP verification with email in session
             request.session['email_for_reset'] = email
